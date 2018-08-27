@@ -19,10 +19,10 @@
     "permissions": ["*://www.goodreads.com/*", "*://*.libraryreserve.com/*", "*://*.overdrive.com/*", "*://dnstools.fastnext.com/*", "storage"],
     "content_scripts": [{
         "matches": ["https://www.goodreads.com/*"],
-        "js": ["src/jquery-2.1.4.min.js", "src/goodreads_inject.js"]
+        "js": ["src/jquery-3.3.1.min.js", "src/goodreads_inject.js"]
     }, {
         "matches": ["https://www.overdrive.com/libraries"],
-        "js": ["src/jquery-2.1.4.min.js", "src/overdrive_inject.js"]
+        "js": ["src/jquery-3.3.1.min.js", "src/overdrive_inject.js"]
     }],
     "web_accessible_resources": ["icons/headphones.svg", "icons/throbber.gif", "icons/icon25.png", "icons/icon25-hover.png", "icons/icon48.png", "src/options/index.html"],
     "applications": {

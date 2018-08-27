@@ -86,7 +86,7 @@ function getOverdriveAvailability() {
 	});
 
 	// if a single book page
-	if (showOnPages["descriptionPage"] && book && book.size() > 0 && $("div#AGtable").size() == 0) {
+	if (showOnPages["descriptionPage"] && book && book.length > 0 && $("div#AGtable").length == 0) {
 		var id = "SINGLEBOOK";
 
 		// inject the table we're going to populate
@@ -119,13 +119,13 @@ function getOverdriveAvailability() {
 				author: cleanAuthorForSearch($(this).parent().find(".authorName").text())
 			});
 		});
-	} else if (showOnPages["shelfPage"] && bookshelves && bookshelves.size() > 0) { // else if on my book shelf page
+	} else if (showOnPages["shelfPage"] && bookshelves && bookshelves.length > 0) { // else if on my book shelf page
 		// inject the table column we're going to populate
-		if ($("th.overdrive").size() == 0) {
+		if ($("th.overdrive").length == 0) {
 			$("th.avg_rating").after('<th class="header field overdrive"><a href="#" id=AGsort>on overdrive</a></th>');
 
 			// if the header is clicked to sort the column
-			$("#AGsort").click(function() {
+			$("#AGsort").on("click", function() {
 				var arrow = $("th img");
 				arrow.detach();
 				arrow.insertAfter($(this));
@@ -177,7 +177,7 @@ function getOverdriveAvailability() {
 		//   or if a book's position is manually changed
 		if (tableUpdateCheckInterval == null) {
 			tableUpdateCheckInterval = setInterval(function() {
-				if ($("tr.bookalike:not(:has(td.AGseen))").size() > 0) {
+				if ($("tr.bookalike:not(:has(td.AGseen))").length > 0) {
 					getOverdriveAvailability();
 				}
 				// sort rows by availability if necessary
@@ -201,10 +201,10 @@ $(document).ready(function() {
 				.flip-vertical {-moz-transform: scaleY(-1);-webkit-transform: scaleY(-1);-o-transform: scaleY(-1);transform: scaleY(-1);-ms-filter: flipv; /*IE*/filter: flipv;}\
 				</style>");
 	$("#usernav").prepend("<li><a target='_blank' href='" + chrome.extension.getURL("src/options/index.html") + "'><img id='AGimg' src='" + chrome.extension.getURL('icons/icon25.png') + "' style='width:16px;height:16px' title='Available Goodreads settings'></a></li>");
-	$("#AGimg").mouseover(function() { 
+	$("#AGimg").on("mouseover", function() { 
             $(this).attr("src", chrome.extension.getURL('icons/icon25-hover.png'));
         })
-        .mouseout(function() {
+        .on("mouseout", function() {
             $(this).attr("src", chrome.extension.getURL('icons/icon25.png'));
         });
 
@@ -230,7 +230,7 @@ $(document).ready(function() {
 
 				libraryClassNames.push("AGloading" + libraryName);
 			}
-			$("tbody").change();
+			$("tbody").trigger("change");
 			getOverdriveAvailability();
 		});
 	});
